@@ -1,15 +1,13 @@
-import { Game } from 'src/games/games.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
 } from 'typeorm';
 
 @Entity()
-export class Mod {
+export class Game {
   @PrimaryGeneratedColumn()
   id: string;
 
@@ -17,16 +15,7 @@ export class Mod {
   name: string;
 
   @Column()
-  description: string;
-
-  @Column()
-  category: string;
-
-  @ManyToOne(() => Game, (game) => game.id)
-  gameID: Game;
-
-  @Column()
-  userID: string;
+  desc: string;
 
   @CreateDateColumn({
     type: 'timestamp',

@@ -9,7 +9,11 @@ export class ModsService {
   constructor(@InjectRepository(Mod) private modRepository: Repository<Mod>) {}
 
   async findAll(): Promise<Mod[]> {
-    const mods = await this.modRepository.find();
+    const mods = await this.modRepository.find({
+      relations: {
+        gameID: true,
+      },
+    });
     if (mods.length !== 0) {
       return mods;
     }
