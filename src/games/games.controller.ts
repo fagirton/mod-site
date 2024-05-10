@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { GamesService } from './games.module';
 import { CreateGameDto } from './interfaces/games.dto';
 import { Game } from './games.entity';
+import { GamesService } from './games.service';
 
 @Controller('games')
 export class GamesController {

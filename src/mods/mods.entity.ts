@@ -1,4 +1,4 @@
-import { Game } from 'src/games/games.entity';
+import { Game } from '../games/games.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,

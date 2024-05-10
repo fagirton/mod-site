@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { CreateModDto, UpdateModDto } from './interfaces/mods.dto';
+import { CreateModDto } from './interfaces/mods.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Mod } from './mods.entity';
 import { Repository } from 'typeorm';
+import { Game } from 'src/games/games.entity';
 
 @Injectable()
 export class ModsService {
-  constructor(@InjectRepository(Mod) private modRepository: Repository<Mod>) {}
+  constructor(
+    @InjectRepository(Mod) private modRepository: Repository<Mod>,
+    @InjectRepository(Game) private gameRepository: Repository<Game>,
+  ) {}
 
   async findAll(): Promise<Mod[]> {
     const mods = await this.modRepository.find({
@@ -19,12 +23,15 @@ export class ModsService {
     }
   }
 
-  createOne(dto: CreateModDto) {
+  async createOne(dto: CreateModDto) {
+    const game = await this.gameRepository.findOne({
+      where: { id: dto.gameID },
+    });
     const mod = this.modRepository.create({
       name: dto.name,
       description: dto.description,
       category: dto.category,
-      gameID: dto.gameID,
+      gameID: game,
       userID: dto.userID,
     });
     return this.modRepository.save(mod);

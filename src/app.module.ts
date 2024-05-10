@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ModsModule } from './mods/mods.module';
 import { Mod } from './mods/mods.entity';
 import { GamesModule } from './games/games.module';
+import { Game } from './games/games.entity';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { GamesModule } from './games/games.module';
       username: 'nest',
       password: 'nestpassword',
       database: 'nestMods',
-      entities: [Mod],
+      entities: [Mod, Game],
       synchronize: false,
     }),
     ModsModule,

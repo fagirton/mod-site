@@ -10,4 +10,3 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   providers: [GamesService],
 })
 export class GamesModule {}
-export { GamesService };
