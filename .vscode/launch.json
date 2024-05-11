@@ -2,13 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch via NPM",
+      "name": "NPM",
       "request": "launch",
       "runtimeArgs": ["run", "start:dev"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "type": "node",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
