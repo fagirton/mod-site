@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateModDto } from './interfaces/mods.dto';
+import { CreateModDto, FindModDto, UpdateModDto } from './interfaces/mods.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Mod } from './mods.entity';
 import { Repository } from 'typeorm';
@@ -35,5 +35,25 @@ export class ModsService {
       userID: dto.userID,
     });
     return this.modRepository.save(mod);
+  }
+
+  async update(dto: UpdateModDto) {
+    const game = await this.gameRepository.findOne({
+      where: { id: dto.gameID },
+    });
+    return this.modRepository.update(
+      { id: dto.id },
+      {
+        name: dto.name,
+        category: dto.category,
+        description: dto.description,
+        gameID: game,
+        userID: dto.userID,
+      },
+    );
+  }
+
+  async delete(dto: FindModDto) {
+    return this.modRepository.delete({ id: dto.id });
   }
 }
