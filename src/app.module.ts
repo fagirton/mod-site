@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ModsModule } from './mods/mods.module';
 import { GamesModule } from './games/games.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -21,6 +23,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         entities: [],
         autoLoadEntities: true,
       }),
+    }),
+    ServeStaticModule.forRoot({
+      serveRoot: "/api/media",
+      rootPath: join(__dirname, '..', 'client'),
     }),
     ModsModule,
     GamesModule,
